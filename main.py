@@ -43,8 +43,6 @@ def save_password():
     print("Contraseña guardada de manera segura.")
 
 # Función para recuperar contraseñas
-# Función para recuperar contraseñas
-# Función para recuperar contraseñas
 def get_password():
     # Pedimos el nombre de usuario para recuperar la contraseña
     username = input("Introduce tu nombre de usuario para recuperar la contraseña: ")
