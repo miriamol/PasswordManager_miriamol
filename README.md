@@ -20,7 +20,7 @@ Este es un proyecto de gestión de contraseñas, donde puedes guardar y recupera
 Para instalar y ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
 1. Clona este repositorio:
-   git clone https://github.com/tu_usuario/PasswordManager.git
+   git clone https://github.com/miriamol/PasswordManager_miriamol
 Navega al directorio del proyecto:
 
 cd PasswordManager
