@@ -20,40 +20,26 @@ Este es un proyecto de gestión de contraseñas, donde puedes guardar y recupera
 Para instalar y ejecutar este proyecto en tu máquina local, sigue estos pasos:
 
 1. Clona este repositorio:
-
-   ```bash
    git clone https://github.com/tu_usuario/PasswordManager.git
 Navega al directorio del proyecto:
 
-bash
-Copiar código
 cd PasswordManager
 Crea un entorno virtual (opcional pero recomendado):
 
-bash
-Copiar código
 python -m venv .venv
 Activa el entorno virtual:
 
 En Windows:
 
-bash
-Copiar código
 .venv\Scripts\activate
 En macOS/Linux:
 
-bash
-Copiar código
 source .venv/bin/activate
 Instala las dependencias necesarias:
 
-bash
-Copiar código
 pip install -r requirements.txt
 Ejecuta el proyecto:
 
-bash
-Copiar código
 python main.py
 Esto iniciará el Gestor de Contraseñas, donde podrás elegir entre guardar o recuperar contraseñas.
 
@@ -78,5 +64,6 @@ Crea una nueva rama para tu característica (git checkout -b nueva-caracteristic
 Realiza tus cambios y haz commit (git commit -am 'Añadir nueva característica').
 Haz un push a la rama (git push origin nueva-caracteristica).
 Abre un Pull Request describiendo tus cambios.
+
 Licencia
 Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
