@@ -4,7 +4,7 @@
 import os
 import hashlib
 from cryptography.fernet import Fernet
-
+from tkinter import messagebox
 
 # Función para guardar contraseñas
 # librería de cifrado para proteger las contraseñas antes de guardarlas cryptography
@@ -44,40 +44,42 @@ def save_password():
 
 # Función para recuperar contraseñas
 def get_password():
-    # Pedimos el nombre de usuario para recuperar la contraseña
     username = input("Introduce tu nombre de usuario para recuperar la contraseña: ")
-
-    # Cargar la clave de cifrado
-    key = load_key()
-
-    # Crear un objeto Fernet para descifrar
-    f = Fernet(key)
-
-    # Abrir el archivo de contraseñas
     try:
-        with open("passwords.txt", "r") as file:
-            for line in file:
-                # Ignorar líneas vacías
-                if line.strip() == "":
-                    continue
-
-                try:
-                    # Desempaquetar la línea (usuario: contraseña cifrada)
-                    user, encrypted_password = line.strip().split(": ")
-
-                    # Verificar si el nombre de usuario coincide
-                    if user == username:
-                        # Descifrar la contraseña
-                        decrypted_password = f.decrypt(encrypted_password.encode()).decode()
-                        print(f"Contraseña recuperada: {decrypted_password}")
-                        return
-                except ValueError:
-                    # Si no hay dos partes en la línea, se ignora
-                    continue
-        print("No se encontró el usuario.")
+        with open("passwords.txt", "r") as f:
+            for line in f:
+                stored_user, encrypted_password = line.strip().split(": ")
+                if stored_user == username:
+                    with open("secret.key", "rb") as key_file:
+                        key = key_file.read()
+                    fernet = Fernet(key)
+                    decrypted_password = fernet.decrypt(encrypted_password.encode()).decode()
+                    print(f"Contraseña recuperada: {decrypted_password}")
+                    return
+            print("Usuario no encontrado.")
+    except ValueError:
+        print("Error al procesar el archivo. Asegúrate de que el formato sea correcto.")
     except FileNotFoundError:
-        print("El archivo de contraseñas no existe. ¿Has guardado alguna contraseña previamente?")
+        print("Archivo de contraseñas no encontrado. Guarda una contraseña primero.")
+    except Exception as e:
+        print(f"Ocurrió un error inesperado: {e}")
 
+def recuperar_contraseña():
+    username = username_entry.get() # type: ignore
+    try:
+        with open("passwords.txt", "r") as f:
+            for line in f:
+                stored_user, encrypted_password = line.strip().split(": ")
+                if stored_user == username:
+                    with open("secret.key", "rb") as key_file:
+                        key = key_file.read()
+                    fernet = Fernet(key)
+                    decrypted_password = fernet.decrypt(encrypted_password.encode()).decode()
+                    messagebox.showinfo("Contraseña Recuperada", f"Tu contraseña es: {decrypted_password}")
+                    return
+            messagebox.showwarning("Usuario no encontrado", "No se encontró este usuario.")
+    except Exception as e:
+        messagebox.showerror("Error", f"Ocurrió un error: {e}")
 # Menú principal
 def main_menu():
     print("¡Bienvenido/a a este Gestor de Contraseñas!")
